@@ -39,7 +39,7 @@ app.add_middleware(
 )
 
 
-app = FastAPI()
+
 load_dotenv()
 
 # @app.get('/ask')
@@ -105,18 +105,31 @@ function_definitions_llm = [
             "required": ["filename", "targetfile", "email"]
         }
     },
-    {
-        "name": "A2",
-        "description": "Format a markdown file using a specified version of Prettier.",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "prettier_version": {"type": "string", "pattern": r"prettier@\d+\.\d+\.\d+"},
-                "filename": {"type": "string", "pattern": r".*/(.*\.md)"}
-            },
-            "required": ["prettier_version", "filename"]
-        }
-    },
+    # {
+    #     "name": "A2",
+    #     "description": "Format a markdown file using a specified version of Prettier.",
+    #     "parameters": {
+    #         "type": "object",
+    #         "properties": {
+    #             "prettier_version": {"type": "string", "pattern": r"prettier@\d+\.\d+\.\d+"},
+    #             "filename": {"type": "string", "pattern": r".*/(.*\.md)"}
+    #         },
+    #         "required": ["prettier_version", "filename"]
+    #     }
+    # },
+      {
+    "name": "A2",
+    "description": "Format a markdown file using a specified version of Prettier.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "prettier_version": {"type": "string", "pattern": "prettier@\\d+\\.\\d+\\.\\d+"},
+            "filename": {"type": "string", "pattern": ".*/.*\\.md"}
+              },
+        "required": ["prettier_version", "filename"]
+          }
+      },
+
     {
         "name": "A3",
         "description": "Count the number of occurrences of a specific weekday in a date file.",

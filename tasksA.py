@@ -14,7 +14,7 @@ load_dotenv()
 AIPROXY_TOKEN = os.getenv('AIPROXY_TOKEN')
 
 
-def A1(email="xxxxxxxxx@ds.study.iitm.ac.in"):
+def A1(email="21f3002112@ds.study.iitm.ac.in"):
     try:
         process = subprocess.Popen(
             ["uv", "run", "https://raw.githubusercontent.com/sanand0/tools-in-data-science-public/tds-2025-01/project-1/datagen.py", email],
@@ -27,13 +27,30 @@ def A1(email="xxxxxxxxx@ds.study.iitm.ac.in"):
     except subprocess.CalledProcessError as e:
         raise HTTPException(status_code=500, detail=f"Error: {e.stderr}")
 # A1()
-def A2(prettier_version="prettier@3.4.2", filename="/data/format.md"):
-    command = [r"C:\Program Files\nodejs\npx.cmd", prettier_version, "--write", filename]
+# def A2(prettier_version="prettier@3.4.2", filename="/data/format.md"):
+#     #command = [r"C:\Program Files\nodejs\npx.cmd", prettier_version, "--write", filename]
+    
+#     # try:
+#     #     subprocess.run(command, check=True)
+#     #     print("Prettier executed successfully.")
+#     # except subprocess.CalledProcessError as e:
+#     #     print(f"An error occurred: {e}")
+
+
+def A2(prettier_version="prettier@3.4.2", filename="C:\\data\\format.md"):
+    command = ["npx", prettier_version, "--write", filename]
+    
     try:
-        subprocess.run(command, check=True)
-        print("Prettier executed successfully.")
+        result = subprocess.run(command, check=True, capture_output=True, text=True, shell=True)
+        print("✅ Prettier executed successfully.")
+        print(result.stdout)  # Output print kar raha hai
     except subprocess.CalledProcessError as e:
-        print(f"An error occurred: {e}")
+        print("❌ An error occurred while running Prettier:")
+        print(e.stderr) 
+
+
+
+    
 
 def A3(filename='/data/dates.txt', targetfile='/data/dates-wednesdays.txt', weekday=2):
     input_file = filename
